@@ -5,6 +5,7 @@ const commentsRoute = require("./routes/comments_route");
 require("dotenv").config();
 
 const app = express();
+const uri = process.env.DB_CONNECTION;
 
 // Middleware to parse JSON bodies
 app.use(express.json());
@@ -16,14 +17,9 @@ app.use("/posts", postsRoute);
 app.use("/comments", commentsRoute);
 
 // Connect to MongoDB
-mongoose.connect(process.env.DB_CONNECTION, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-}).then(() => {
-  console.log("Connected to MongoDB");
-}).catch((error) => {
-  console.error("Error connecting to MongoDB:", error);
-});
+mongoose.connect(uri)
+    .then(() => console.log('Connected to MongoDB'))
+    .catch(err => console.error('Error connecting to MongoDB:', err));
 
 // Start the server
 const PORT = process.env.PORT || 3000;
