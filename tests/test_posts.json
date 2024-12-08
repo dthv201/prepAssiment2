@@ -1,0 +1,11 @@
+[{
+  "title": "Test title",
+  "content": "Test content",
+  "sender": "Eliav"
+  },
+  {
+    "title": "Test title 2",
+    "content": "Test content 2",
+    "sender": "Eliav 2"
+  }
+]
