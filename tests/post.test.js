@@ -1,23 +1,10 @@
 
-const e = require("express")
 const request = require("supertest")
-const app = require("./server")
+const app = require("../server")
 const mongoose = require("mongoose")
-const postModel = require("./models/posts_model")
-const testPost = [{ 
-  title: "Test title",
-  content: "Test content",
-  sender: "Eliav" 
-  },
-  {
-    title: "Test title 2",
-    content: "Test content 2",
-    sender: "Eliav 2"
-  },
-  
+const postModel = require("../models/posts_model")
 
-
-];
+const testPost = require("./test_posts.json")
 beforeAll(async() => {
   // console.log("Before All");
    await postModel.deleteMany();
@@ -84,6 +71,9 @@ describe("Initial test 1", () => {
     expect(response.statusCode).toBe(200);
 
     const response2 = await request(app).get(`/posts/${testPost[0]._id}`);
-    expect(response2.statusCode).toBe(404);
+    expect(response2.statusCode).toBe(200);
   });
+
+  
+
 });

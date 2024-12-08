@@ -1,11 +1,17 @@
-const app = require('./server');
+
+const appInit = require("./server");
 // Start the server
   
   const PORT = process.env.PORT || 3000;
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+  const tmpFunc = async()=>{
+   const app = await appInit();
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+  });
+  
+};
+  
+tmpFunc();
 
 
-
-module.exports = app;
+// module.exports = app;
