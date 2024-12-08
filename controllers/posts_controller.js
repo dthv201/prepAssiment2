@@ -37,6 +37,35 @@ const getAllPosts = async (req, res) => {
     res.status(400).send(error.message);
   }
 };
+// const deletePostById = async (req, res) => {
+//  const postId = req.params.id;
+//   try {
+//    await postModel.findByIdAndDelete(postId);
+//     res.status(200).send("Post deleted successfully");
+//   } catch (error) {
+//     res.status(404).send(error);
+//   }
+// };
+const deletePostById = async (req, res) => {
+  const postId = req.params.id;
+  console.log(`Attempting to delete post with ID: ${postId}`);
+
+  try {
+    const post = await postModel.findById(postId);
+    if (!post) {
+      console.log(`Post with ID: ${postId} not found`);
+      return res.status(404).send({ message: "Post not found" });
+    }
+    console.log(`Post found: ${post}`);
+    const deletedPost = await postModel.findByIdAndDelete(postId);
+    console.log(`Deleted post: ${deletedPost}`);
+    res.status(200).send({ message: "Post deleted successfully" });
+  } catch (error) {
+    console.log(`Error deleting post with ID: ${postId}`, error);
+    res.status(400).send(error);
+  }
+};
+
 
 const updatePost = async (req, res) => {
   const postId = req.params.id;
@@ -54,5 +83,7 @@ module.exports = {
   getPostById, 
   createPost, 
   getAllPosts, 
-  updatePost 
+  deletePostById,
+  updatePost,
+   
 };
