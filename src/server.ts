@@ -3,8 +3,8 @@ const app = express();
 import dotenv from "dotenv";
 dotenv.config();
 import mongoose from "mongoose";
-import postsRoutes from "./routes/posts_routes";
-import commentsRoutes from "./routes/comments_routes";
+import postsRoutes from "./routes/posts_route";
+import commentsRoutes from "./routes/comments_route";
 import bodyParser from "body-parser";
 
 const initApp = async () => {
